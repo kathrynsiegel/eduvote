@@ -1,0 +1,13 @@
+<div>
+<%= form_for(:session, url: signin_path) do |f| %>
+	<div class="log_in_box">
+	    <%= f.label :email, class: 'sign_in_lable' %><br />
+	    <%= f.text_field :email, class: 'sign_in_form_left' %>
+	</div>
+	<div class="log_in_box">
+	    <%= f.label :password, class: 'sign_in_lable' %><br/>
+	    <%= f.password_field :password, class: 'sign_in_form_right' %><br /><br />
+	    <%= f.submit "Log in", class: 'btn btn-reg' %> 
+	</div>
+<% end %>
+</div>

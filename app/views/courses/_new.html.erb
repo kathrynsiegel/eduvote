@@ -1,0 +1,30 @@
+<%= form_for(@course) do |f| %>
+	<div class="form_errors">
+		<%= render 'shared/errors', object: f.object %>
+	</div>
+	<div id="new_course_left">
+		<%= f.text_field :name, { placeholder: "Course Name", class: "form-control" } %><br><br><br>
+		<h4>Instructors:</h4>
+		<%= f.collection_select :instructors, @instructors, :id, :name, {}, { :multiple => true, :size => 4, class: 'instructors form-control' } %>
+		<div id="add_instructor">
+			<input type="text" class="addBox form-control" id="instructor-add-text" placeholder="Instructor Email"/>
+			<button class="course_add_button button addButton" id="add-user">Add Instructor</button>
+		</div>
+	</div>
+	<div id="new_course_right">
+		<label class="date_label">Start Date:</label>
+	  	<%= select_date Date.current , prefix: 'start', order: [:month, :day, :year] %>
+	  	<br><br>
+	  	<label class="date_label">End Date:</label>
+	  	<%= select_date Date.current + 1.months, prefix: 'end', order: [:month, :day, :year] %>
+	  	<div id="check_box_weekdays"><br>
+		  	<%= check_box_tag 1 %><label>Mon.</label>
+		  	<%= check_box_tag 2 %><label>Tues.</label>
+			<%= check_box_tag 3 %><label>Wed.</label>
+			<%= check_box_tag 4 %><label>Thurs.</label>
+			<%= check_box_tag 5 %><label>Fri.</label>
+		</div><br><br>
+
+		<%= f.submit class: 'course_submit_button' %>
+	</div>
+<%end%>

@@ -1,0 +1,46 @@
+<% provide(:title, @course.name) %>
+
+<div class="page-container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<%=render 'shared/sidebar' %>
+
+		<div id="course_main_container" class="main col-xs-12 col-sm-10">
+			<%=render 'shared/button' %>
+			<div class="user_options orange">
+				<div id = "new_enrollment_container">
+					<div id="course_name">
+						<h3><%= @course.name %> - Lectures</h3>
+					</div>
+					<% if !@user.instructor? %>
+						<div id="scores">
+						<p>Attendance: <%= @attendance.to_s %>%</p>
+						<p>Accuracy: <%= @accuracy_score.to_s %>%</p>
+						</div>
+					<% end %>
+				</div>
+			</div>
+
+			<% if @user.instructor? %>
+				<div id="add-lecture-link" style="display:none">
+					<div class="calendar_options options-center">
+						<%= form_tag lectures_path %>
+						<%= hidden_field_tag "lecture[course]", @course.id %>
+						<span title="Add Lecture">
+							<%= button_tag( :class => "add-lecture-button") do %>
+							<span class='glyphicon glyphicon-plus-sign'></span>
+							<% end %>
+						</span>
+					</div>
+				</div>
+			<% end %>
+			<%# display a message if there is an open question in the course the user (a student) hasn't answered %>
+			<div class="open_question_message">
+				<% if @user.should_answer_question(@course) %>
+					<%= link_to '<span class="glyphicon glyphicon-star yellow-icon"></span> Respond to the open question.'.html_safe, question_path(Question.find(@course.active_question_id)) %>
+				<% end %>
+			</div>
+			<%=render 'calendar' %>
+			<%=render 'calendar_list' %>
+		</div><!-- /.col-xs-12 main -->
+	</div><!--/.row-->
+</div><!--/.page-container-->

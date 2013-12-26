@@ -1,0 +1,41 @@
+<ul class="calendar_navtab nav nav-tabs">
+	<li class="first active"><a>Calendar <span class='calendar_icon glyphicon glyphicon-calendar'></span></a></li>
+	<li class="second"><a>List<span class='calendar_icon glyphicon glyphicon-th-list'></span></a></li>
+</ul>
+<div id = "calendar">
+	<!--if class in progress, go to current class-->
+	<!--if future class , go to first month of class-->
+	<!--if pas class , go to las month of class-->
+	<%#, {:month=>@start_month, :year=>@start_year}%>
+	<%= calendar @events do |event| %>
+	<div>
+		<% if current_user.instructor? %>
+			<p class = "lectureName" contenteditable="true" onkeypress="return (this.innerText.length <= 30)">
+				<%=event.display_name.html_safe%>
+			</p>
+		<% else %>
+			<p class = "lectureName">
+				<%= event.display_name.html_safe %>
+			</p>
+		<% end %>
+		<div class = "calendar_options">
+			<%# Only instructors can view details of lectures in the future. %>
+			<% if current_user.instructor? || event.time < Date.today %>
+				<span title="Show Lecture">
+					<%= link_to '<span class="glyphicon glyphicon-circle-arrow-right"></span>'.html_safe, lecture_path(event) %>
+				</span>
+			<% end %>
+			<%# Only instructors can edit lectures. %>
+			<% if current_user.instructor? %>
+			<span title="New Question">
+				<%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, new_question_path(:course => @course.id, :lecture => event.id) %>
+			</span>
+			<span title="Delete Lecture">
+				<%= link_to '<span class="glyphicon glyphicon-remove-circle"></span>'.html_safe, lecture_path(event), method: :delete, data: { confirm: 'Are you sure you want to delete this lecture?' } %>
+			</span>
+			<% end %>
+		</div>
+		<div class = "lectureDate"><%=event.start_time%></div>
+	</div>
+	<% end %>
+</div>

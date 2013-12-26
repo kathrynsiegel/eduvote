@@ -1,0 +1,126 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1{
+	color:black;
+}
+.sign_up{
+	width: 400px;
+	border-radius: 10px;
+	padding: 20px 50px 50px 50px !important;
+	background-color: #eee !important;
+	color: black;
+	z-index: 10;
+	h2{
+		color: black;
+		line-height: 2.5em;
+	}
+	li > label {
+		margin: 0px 5px 0px 0px;
+		color: black !important;
+		font-weight: 500;
+	}
+}
+
+.sign_up_errors {
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+#signup_container{
+	position:fixed;
+	width: 300px;
+	height:800px;
+	top:50%;
+	left:50%;
+	margin-left: -150px;
+	margin-top: -300px;
+}
+
+table {
+	width: 60%;
+	margin: auto;
+	th {
+		font-size: 36px;
+	}
+	tr {
+		font-size: 20px;
+	}
+	td {
+		padding: 5px;
+	}
+}
+
+.user_header {
+	text-align: center;
+	padding: 50px;
+	h1 {
+		font-size: 60px;
+		text-shadow: -2px 2px #CCD;
+	}
+}
+
+#new_enrollment_container{
+	height: 40px;
+
+	.twitter-typeahead{
+		width:300px;
+		text-align: left;
+		margin-right: 20px;
+	}
+
+	.addButton, .newCourseButton{
+		float:right !important;
+		margin-right: 40px !important;
+	}
+}
+.user_options {
+	background-color: #14c8e3;
+	padding: 10px;
+	text-align: right;
+	margin: 0 auto;
+	a{
+		color: black;
+	}
+	a:hover{
+		text-decoration: none;
+	}
+	button {
+		background-color: #14c8e3;
+		color: white;
+		font-size: 16px;
+		height: 36px;
+	}
+	ul {
+		width: 360px;
+		margin: auto;
+		list-style-type: none;
+	}
+	li {
+		float: left;
+	}
+	.white{
+		background-color: #cceeff !important;
+		color:black;
+	}
+	.white:hover{
+		background-color: white !important;
+		color:black;
+	}
+	.orange{
+		background-color: #ffeedd !important;
+		color:black;
+	}
+	.orange:hover{
+		background-color: white !important;
+		color:black;
+	}
+}
+
+.yellow-icon {
+	color: orange;
+}
+.yellow-icon:hover{
+	color: orange;
+}

@@ -1,0 +1,60 @@
+<% provide(:title, @user.name) %>
+
+<div class="page-container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<%#shared sidebar used in all views%>
+		<%=render 'shared/sidebar' %>
+
+		<%#main page content%>
+		<div id="course_main_container" class="main col-xs-12 col-sm-10">
+
+			<%#button for responsive page when width is less than
+			a certain pixel amount%>
+			<%=render 'shared/button' %>
+
+			<% if current_user.instructor? %>
+				<%#drop down menu for creating a new course%>
+				<%#only an instructor can create a new course%>
+				<div id="new_course_options">
+					<h3>New Course</h3>
+					<%=render 'courses/new' %>
+				</div>
+			<% end %>
+
+			<%#secondary top bar for page %>
+			<div class="user_options">
+				<div id = "new_enrollment_container">
+					<div id="course_name">
+						<h3>All Courses</h3>
+					</div>
+					<% if @user.instructor? %>
+						<%# instructor can create a course %>
+						<button class="btn button addButton white" id="new-class">New Course</button>
+					<% else %>
+						<%# student can add a course%>
+						<input type="text" class="form-control addBox" id="class-add-text" placeholder="Class Name"/>
+						<button class="btn button addButton" id="add-class">Add Class</button>
+					<% end %>
+				</div><!--new_enrollment_container-->
+			</div><!--user_options-->
+
+			<br>
+			<%= render 'users/course_list' %>
+		</div><!-- /.col-xs-12 main -->
+	</div><!--/.row-->
+</div><!--/.page-container-->
+
+<script type="text/javascript">
+//drop down for new question
+$(document).ready(function(){
+	<% if @new_course_error == false %>
+	$('#new_course_options').hide();
+	<% else %>
+	$('#new_course_options').show();
+	<% end %>
+	$( "#new-class" ).click(function() {
+		$( "#new_course_options" ).slideToggle( "medium", function() {
+		});
+	});
+});
+</script>

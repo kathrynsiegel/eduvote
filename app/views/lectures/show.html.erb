@@ -1,0 +1,33 @@
+<% provide(:title, @lecture.display_name) %>
+
+<div class="page-container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<%=render 'shared/sidebar' %>
+
+		<div id="course_main_container" class="main col-xs-12 col-sm-10">
+			<%=render 'shared/button' %>
+			<div class="user_options orange">
+				<div id = "new_enrollment_container">
+					<div id="course_name">
+						<h3><%=@course.name%>/<%=@lecture.display_name%> - <%= @lecture.display_date %></h3>
+					</div>
+					<% if @user.instructor? %>
+					<button class="btn button addButton orange" id="new-class">
+						<%= link_to "New Question", new_question_path(:course => @lecture.course.id, :lecture => @lecture.id) %>
+					</button>
+					<%end%>
+				</div>
+			</div>
+
+			<div class="questions_all">
+				<% if @lecture.questions.size > 0 %>
+				<div class="panel panel-default question_section">
+					<%= render 'questions', l: @lecture %>
+				</div>
+				<% else %>
+				<br><br><p>No questions yet.</p>
+				<% end %>
+			</div>
+		</div><!-- /.col-xs-12 main -->
+	</div><!--/.row-->
+</div><!--/.page-container-->

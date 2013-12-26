@@ -1,0 +1,22 @@
+<% provide(:title, "New Question") %>
+
+<div class="page-container">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <%=render 'shared/sidebar' %>
+
+        <div id="course_main_container" class="main col-xs-12 col-sm-10">
+            <%=render 'shared/button' %>
+            <div class="user_options purple">
+                <div id = "new_enrollment_container">
+                    <div id="course_name">
+                        <h3>New Question</h3>
+                    </div>
+                </div>
+            </div>
+            <%=render 'form'%>
+        </div>
+    </div>
+    <%=render 'modal'%>
+</div><!-- /.col-xs-12 main -->
+</div><!--/.row-->
+</div><!--/.page-container-->

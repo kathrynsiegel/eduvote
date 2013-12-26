@@ -1,0 +1,81 @@
+<% provide(:title, "Question") %>
+
+<div class="page-container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<%=render 'shared/sidebar' %>
+
+		<div id="course_main_container" class="main col-xs-12 col-sm-10">
+			<div class= "question_display_container row">
+				<% if !@user.instructor? %>
+					<h1><%= @question.course.display_number(@user) %></h1>
+				<% end %>
+				<br>
+				<div class='col-sm-6' id="question">
+					<h1 id='question-title'>Question: <%= simple_format(@question.question_text) %></h1>
+					<h4><%=@question.sig_fig_info%></h4>
+					<ul>
+						<% @question.options.each do |option| %>
+							<li>
+								<div class='row'>
+									<div class='option-choice-show-q orange col-xs-2'>
+										<%= option.choice %>. 
+									</div>
+									<div class='col-xs-10'>
+										<%= option.option_text %>
+									</div>
+								</div>
+							</li>
+						<% end %>
+					</ul>
+					<br>
+					<% if @user.instructor? %>
+						<% if @question.course.active_question_id == @question.id %>
+							<% active = true %>
+							<%= link_to 'Close', course_url(@question.course, question_id: @question.id, open_close: 'close'), method: :put, id: "close_link", class: 'btn left-btn' %>
+						<% else %>
+							<%= link_to 'Open', course_url(@question.course, question_id: @question.id, open_close: 'open'), method: :put, class: 'btn left-btn' %>
+						<% end %>
+					<% elsif @user.type == "Student" %>
+						<div class="question_response">
+							Your Response: <%= @saved_response.nil? ? "(None)" : @saved_response.value %>
+						</div>
+						<% if !@open && @question.lecture.time < Date.today %>
+							<div class="question_answer_area">
+								Answer: <%= @question.answer.nil? ? "(None)" : @question.answer %>
+							</div>
+						<% elsif @saved_response.nil? %>
+							<div class="form_errors">
+								<%= render 'shared/errors', object: @response %>
+							</div>
+							<%= form_for @response do |f| %>
+								<%= hidden_field_tag("response[question]", @question.id) %>
+								<%= hidden_field_tag("response[type]", @question.type) %>
+								<%= f.label "Enter Response" %>
+								<% if @question.type == "NumericQuestion" %>
+									<%= f.text_field :value, placeholder: "Numeric response here" %>
+								<% else %>
+									<% answer_selections = @question.options.collect {|o| [o.choice]} %> 
+									<%= f.select :value, answer_selections, { :prompt => "Select", :selected => nil} %>
+								<% end %>
+								<%= f.submit "Submit" %>
+							<% end %>
+						<% end %>
+					<% end %>
+					<br>
+					<br>
+					<%= link_to 'Back', course_url(@question.course), class: 'btn left-btn' %>
+				</div>
+				<% if @user.instructor? %>
+					<% count = @question.count_responses %>
+					<% if count > 0 || active == true %>
+						<div class="inline col-sm-3" id="responses">
+							<h2>Responses received</h2>
+							<div id="response_num"><%=count%></div>
+							<%= link_to 'See Results', analysis_question_path(@question) %>
+						</div>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

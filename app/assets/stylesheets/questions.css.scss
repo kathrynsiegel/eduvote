@@ -1,0 +1,343 @@
+// Place all the styles related to the Questions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.modal-content {
+	background-color: #d4e1ec !important;
+	ul {
+		list-style-type: none;
+	}
+}
+
+#q_container_super {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+#question_container{
+	margin: 0 auto 0 auto;
+	width:640px;
+	height: 90%;
+	padding:20px;
+	background-color: #c6d7e5;
+	border-radius:3.5%;
+}
+
+#questions_header{
+	text-align: center;
+	padding: 30px 50px 50px 50px;
+	h1{
+		font-size: 70px;
+		text-shadow: -2px 2px #CCD;
+	}
+}
+
+#question_text_area{
+	width: 100%;
+	padding: 10px 30px 10px 10px;
+}
+
+.new_question_text_area, .new_option_text_area{
+	font-size: 16px;
+}
+
+.new_question_text_area{
+	min-width: 580px;
+	max-width: 580px;
+}
+
+.new-q-controls {
+	padding:20px;
+}
+
+.nav-tabs-bl {
+	border-bottom: #428bca;
+}
+.qtype_tab {
+	color:black !important;
+}
+
+.tab-content-new-q {
+	padding:20px;
+}
+
+.letter-for-input {
+	width: 30px;
+	border: none; 
+	font-size: 20px;
+	background-color: transparent;
+}
+
+.new_option_text_area{
+	display: inline-block;
+	min-width:530px !important;
+	max-width:530px !important;
+	margin: 10px 0;
+}
+
+.choice{
+	padding-top: 20px;
+	display: inline-block;
+}
+
+.answer_label{
+	font-size: 24px;
+}
+.addOption{
+	float:right;
+}
+.addOption:hover{
+	background-color: #c5cfdb;
+}
+.SaveForm{
+	height: 50px;
+	background-color: #14c8e3;
+	color: white;
+	font-size: 24px;
+	border:none;
+	border-radius: 5px;
+	margin: 20px 0;
+}
+.SaveForm:hover{
+	background-color: #c5cfdb;
+}
+
+#extra_submit_padding {
+	margin-right:20px;
+	font-size:24px !important;
+}
+
+#open_ended_num_question {
+	margin: 20px 0px;
+	span {
+		float: left;
+	}
+	button {
+		float: left;
+		position: relative;
+		top: -5px;
+		height: 32px;
+		padding: 5px;
+	}
+}
+
+.question_display_container{
+	border-radius: 20px;
+	padding: 50px;
+	text-align: left;
+	width:100%;
+	margin: 0 auto 0 auto;
+
+	h1{
+		font-size: 50px;
+	}
+
+	ul{
+		list-style-type: none;
+		font-size: 50px;
+	}
+
+	.inline {
+		display: inline-block;
+		float: left;
+	}
+
+	#question {
+		width: 70%;
+
+		.form_errors {
+			width: 100%;
+			height: 100%;
+			padding-top: 10px;
+			color:red;
+			ul{
+				list-style-type: none; 
+				font-size: 14px;
+			}
+		}
+
+		ul {
+			font-size: 40px;
+		}
+
+		.option-choice-show-q {
+			width:60px;
+			height:60px;
+			border-radius: 50%;
+			color:white;
+		}
+
+		li {
+			margin-top:5px !important;
+			margin-bottom:5px !important;
+		}
+
+		.left-btn {
+			float:left;
+		}
+	}
+
+	#responses {
+		text-align: center;
+		width: 25%;
+		margin-left: 10px;
+		border: 1px solid #4A4A7C;
+		background-color: #4A4A7C;
+		border-radius: 5px;
+		padding: 10px;
+		color:white;
+		a {
+			color: white;
+		}
+	}
+
+	#response_num {
+		font-size: 100px;
+	}
+
+}
+
+.analysis {
+	ul {
+		list-style-type: none;
+		font-size: 24px;
+	}
+
+	h1{
+		font-size: 36px;
+		font-size: 50px;
+	}
+
+	.correct {
+		border: 1px solid rgba(0,255,0,0.3);
+		background-color: rgba(0,255,0,0.3);
+		border-radius: 5px;
+		padding: 5px;
+		position: relative;
+		left: -5px;
+	}
+}
+
+.questions_all {
+	padding: 30px 50px 30px 30px;
+	width:100%;
+	margin: 0 auto 0 auto;
+
+	h1 {
+		font-size: 50px;
+		text-align: center;
+		text-shadow: -2px 2px #CCD;
+	}
+
+	.question_section_title {
+		font-weight: bold;
+	}
+
+	#infscr-loading {
+		width: 200px;
+		margin: auto;
+		img {
+			width: 150px;
+		}
+	}
+
+	.pagination {
+		display: none;
+	}
+}
+
+.question_section {
+	font-size: 14px;
+	padding-bottom: 10px;
+	text-align: left;
+
+	.question_block {
+		width: 600px;
+		font-size: 18px !important;
+		padding-left: 8px;
+	}
+
+	ul {
+	    list-style-type: none;
+	}
+
+	.question_list_text {
+		padding: 10px;
+		font-weight: 500 !important;
+	}
+
+	.question_actions {
+		float: right;
+		margin: 10px;
+	}
+
+	.question_list_options {
+		padding-left: 2em;
+		padding-bottom: 10px;
+	}
+}
+
+.question_section_title{
+	a{
+		font-size: 20px;
+		font-weight: 500;
+		font-color: purple;
+	}
+}
+
+#mc_question_options{
+	display: inline-block;
+	margin: 8px;
+	width: 580px;
+	border: 1px solid #ccc;
+	padding: 5px;
+	padding-bottom: 25px;
+	border-radius: 5px;
+}
+
+select{
+	width: 200px;
+	height: 34px;
+	font-family: 'Open Sans';
+	border: 1px solid #cccccc;
+	background-color: white !important;
+	border-radius: 4px;
+	padding: 6px;
+	background: url(https://cdn2.iconfinder.com/data/icons/picol-vector/32/arrow_sans_down-128.png) no-repeat 95% center;
+	background-size:15px 15px;
+	-webkit-appearance:none;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+h1#question-title {
+	font-weight: 500 !important;	
+}
+#mc_answer_options{
+	width:400px;
+}
+
+.btn-group {
+	.btn {
+		background-color: white;
+	}
+	.btn:hover {
+		background-color: #ccc;
+	}
+	.glyphicon {
+		color: black;
+	}
+}
+
+.delete_post:hover{
+	background-color:red !important;
+	color:white !important;
+}
+
+
+
+
+
+

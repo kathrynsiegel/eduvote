@@ -1,0 +1,21 @@
+<script type="text/javascript">
+	<%if !@current_page.nil?%>
+		<%if @current_page == "users/show"%>	
+			$("#all_courses_link").css("background-color","#14c8e3");
+			$("#all_courses_link").children(".nav_link").css("color","white");
+		<%elsif @current_page == "courses/show"%>
+			$("#lectures_link").css("background-color","#DE586F");
+			$("#lectures_link").children(".nav_link").css("color","white");
+		<%elsif @current_page == "courses/students"%>
+			$("#students_link").css("background-color","#66cccc");
+			$("#students_link").children(".nav_link").css("color","white");
+		<%elsif @current_page == "questions/index"%>
+			$("#questions_link").css("background-color","#92C960");
+			$("#questions_link").children(".nav_link").css("color","white");
+		<%elsif @current_page == "questions/new"%>
+			$("#new_question_link").css("background-color","purple");
+			$("#new_question_link").children(".nav_link").css("color","white");
+		<%else%>
+		<%end%>
+	<%end%>
+</script>

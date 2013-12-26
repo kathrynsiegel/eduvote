@@ -1,0 +1,77 @@
+<%= form_for(@question) do |f| %>
+
+<%#tab navigation between MC and Numeric Questions%>
+<ul class="calendar_navtab nav nav-tabs">
+    <li class="first MCQuestion_area">
+        <a class="qtype_tab" href="#MCQuestion_tab" data-toggle="tab">Multiple Choice</a>
+    </li>
+    <li class="NumericQuestion_area">
+        <a class="qtype_tab" href="#NumericQuestion_tab" data-toggle="tab">Numeric</a>
+    </li>
+</ul>
+
+
+<div class="tab-content tab-content-new-q">
+    <%#errors%>
+    <%= render 'shared/errors', object: f.object %>
+
+    <%#question text area%>
+    <div id="question_text_area">
+        <%= f.text_area :question_text, { class: 'new_question_text_area form-control', placeholder: "Question Text", rows: 5 } %>
+    </div>
+
+    <%#hidden fields%>
+    <%= f.hidden_field :course_id, :value => @course.id %>
+    <% qtype = @question.type || "MCQuestion" %>
+    <%= hidden_field_tag("question[type]", qtype) %>
+
+    <%#content specific to a Multiple Choice question%>
+    <div class="tab-pane MCQuestion_area" id="MCQuestion_tab">
+        <%#Multiple Choice options%>
+        <div id="mc_question_options">
+            <% for option in @options %>  
+                <%= f.fields_for "options[]", option do |option_fields| %> 
+                    <div class="option">
+                        <%= option_fields.text_field :choice, {class: 'letter-for-input choice form_control', readonly: true } %> 
+                        <%= option_fields.text_area :option_text, {class: 'new_option_text_area value form-control', placeholder: "Option", rows: 1} %>
+                    </div>
+                <% end %>
+            <% end %><br>
+            <%= f.button "Add Option", class: "addOption btn-reg" %>
+        </div>
+        <div id="mc_answer_options">
+            <%= f.label :answer, class: "answer_label" %>
+            <% answer_selections = @options.collect {|o| ["<option>" + o.choice + "</option>"]} %> 
+            <%= select_tag("question[mc_answer]", answer_selections.join(''), { :prompt => "Select", :selected => nil, :class => "answer_options" }) %>
+        </div>
+    </div>
+
+    <%#content specific for numerical question%>
+    <div class="tab-pane NumericQuestion_area" id="NumericQuestion_tab">
+        <%= f.label :answer, class: "answer_label" %>
+        <%= text_field_tag("question[num_answer]", nil, {class: "form-control", placeholder: "Enter a decimal value"}) %>
+    </div>
+</div>
+
+<%#lecture, preview and submit%>
+<div id="controls" class='new-q-controls'>
+    <% if @lectures.size > 0 %>
+    <% if @selected.nil? %>
+    <% selected_id = @lectures.first.id %>
+    <% else %>
+    <% selected_id = @selected.id %>
+    <% end %>
+
+    <span style="display:none" id="selected-lecture" data-sel-id=<%= selected_id %>></span>
+    <% end %>
+
+    <%= f.collection_select :lecture_id, @lectures, :id, :display_name %>
+
+    <div class='row'>
+        <button class="SaveForm btn-reg preview_question" data-toggle="modal" id='extra_submit_padding' data-target="#myModal">
+            Preview
+        </button>
+        <%= f.submit class: "SaveForm" %>
+    </div>
+</div>
+<% end %>

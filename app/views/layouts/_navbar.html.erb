@@ -1,0 +1,15 @@
+<nav>
+    <div id="left">
+      <%= link_to "EDUvote", root_url%>
+    </div>
+    <div id="right">
+      <ul>
+        <li><%= link_to "About", about_path%></li>
+        <% if current_user %>
+          <li><%= link_to 'Logout', signout_url %></li>
+        <% else %>
+          <li><button id="sign_up">Sign Up</button></li>
+        <% end %>
+      </ul>
+    </div>
+</nav>

@@ -1,0 +1,45 @@
+<ul class="sign_up">
+    <h2>Sign Up</h2>
+
+    <%#errors%>
+    <% if @user.errors.any? %>
+        <div class="sign_up_errors">
+            The form contains the following errors:
+            <br><br>
+            <%= @user.errors.full_messages.join('; ') %>
+        </div>
+    <% end %>
+
+    <%#form%>
+    <%= form_for(@user, url: users_path) do |f| %>
+    <li>
+        <%= f.text_field :name, placeholder: 'Name', class: 'form-control' %><br />
+    </li>
+    <li>
+        <%= f.text_field :email, placeholder: 'Email', class: 'form-control' %><br />
+    </li>
+    <li>
+        <%= f.password_field :password, placeholder: 'Password', class: 'form-control' %><br />
+    </li>
+    <li>
+        <%= f.password_field :password_confirmation, placeholder: 'Password (confirm)', class: 'form-control' %><br />
+    </li>
+    <li>
+        <%= radio_button(:user, :type, "Student") %>
+        <%= f.label :student %>
+        <%= radio_button(:user, :type, "Instructor") %>
+        <%= f.label :instructor %> 
+    </li>
+    <li>
+        <% display = @user.type == "Student" ? "" : "style=display:none" %><br />
+    </li>
+    <li>
+        <div class="phone_input" <%=display%>>
+           <%= f.text_field :phone_number, placeholder: 'Phone Number', class: 'form-control' %> <br>
+       </div>
+   </li>
+   <li>
+    <%= f.submit "Submit", class: 'btn' %>
+</li>
+<% end %>
+</ul>

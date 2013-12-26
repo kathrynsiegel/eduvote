@@ -1,0 +1,36 @@
+<% provide(:title, "All Questions") %>
+
+<div class="page-container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<%=render 'shared/sidebar' %>
+
+		<div id="course_main_container" class="main col-xs-12 col-sm-10">
+			<%=render 'shared/button' %>
+			<div class="user_options green">
+				<div id = "new_enrollment_container">
+					<div id="course_name">
+						<h3><%=@course.name%> - Questions</h3>
+					</div>
+					<% if current_user.instructor? %>
+						<button class="btn button addButton orange" id="new-class">
+							<%=link_to "New Question", new_question_path(:course => @course.id) %>
+						</button>
+					<% end %>
+				</div>
+			</div>
+			<div class="questions_all">
+				<%if !@course.questions.any? %>
+					<h4>Oh no! There are no questions for this lecture yet.</h4>
+				<%end%>
+				<%= will_paginate @lectures %>
+
+				<% @lectures.each do |l| %>
+				<div class="panel panel-default question_section">
+					<div class="panel-heading question_section_title"><%= link_to l.display_name, l %></div>
+					<%= render 'lectures/questions', l: l %>
+				</div>
+				<% end %>
+			</div>		
+		</div><!-- /.col-xs-12 main -->
+	</div><!--/.row-->
+</div><!--/.page-container-->

@@ -1,0 +1,47 @@
+<table class = "courses">
+	<tr class = "table_title">
+		<td></td>
+		<td>Course Name</td>
+		<td>Head Instructor</td>
+		<% if @user.instructor? %>
+			<td>Lecture(s)</td>
+			<td>Enrollment</td>
+			<td>Question(s)</td>
+		<% else %>
+			<td>Attendance</td>
+			<td>Accuracy</td>
+			<td>#</td>
+		<%end%>
+	</tr>
+	
+	<%# order the courses by creation (latest one shows up first)%>
+	<% @user.courses.order('created_at DESC').each do |course| %>
+		<tr class="table_row clickable">
+			<td class="color_block"> </td>
+			<td>
+				<%= link_to course.name, course_path(course), class: "course_link" %>
+				<%# display a star link if there is an open question in the course they haven't answered %>
+				<% if @user.should_answer_question(course) %>
+					<%= link_to '<span class="glyphicon glyphicon-star yellow-icon"></span>'.html_safe, question_path(Question.find(course.active_question_id)) %>
+				<% end %>
+			</td>
+			<td><%= course.instructors.first.name %></td>
+			<% if @user.instructor? %>
+				<td><%= course.lectures.count %></td>
+				<td><%= course.students.count %></td>
+				<td><%= course.questions.count %></td>
+			<% else %>
+				<td><%= @user.attendance(course) %></td>
+				<td><%= @user.accuracy_score(course) %></td>
+				<td><%= course.display_number(@user) %></td>
+			<% end %>
+		</tr>
+	<% end %>
+	<%# if there are no courses yet %>
+	<% if !@user.courses.any?%>
+	<tr class = "noClasses">
+		<td></td>
+		<td>Oh no! You have no courses yet!</td>
+	</tr>
+	<% end %>
+</table>

@@ -1,0 +1,50 @@
+<% provide(:title, "Responses") %>
+
+
+<div class="page-container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<%=render 'shared/sidebar' %>
+
+		<div id="course_main_container" class="main col-xs-12 col-sm-10">
+			<div class="question_display_container analysis">
+				<div class="row">
+					<div class="col-sm-4">
+						<h1><%= simple_format(@question.question_text) %></h1>
+						<br>
+						<% if @question.type == "NumericQuestion" && !@question.answer.nil? %>
+							<p>Answer: <%=@question.answer%></p>
+						<% else %>
+							<ul>
+							<% @question.options.each do |option| %>
+								<% c = option.choice == @question.answer ? "correct" : "incorrect" %>
+								<li class=<%=c%>><%= option.choice %>. <%= option.option_text %></li>
+							<% end %>
+							</ul>
+						<% end %>
+						<%= link_to "Back to question", question_path(@question) %><br>
+						<% back_string = "Back to " + @question.course.name %>
+						<%= link_to back_string, @question.course %>
+					</div>
+					<div class="col-sm-8">
+						<canvas id="myChart" width="600" height="400"></canvas>
+						<br><br>
+						<p>Total Responses: <%= @question.count_responses %></p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<% if @question.type == "NumericQuestion" %>
+	<% @data.each do |key, value| %>
+	<span class="response-data" data-choice="<%=key%>" data-count="<%=value%>"></span>
+	<% end %>
+<% else %>
+	<% @question.options.each do |option| %>
+		<span class="response-data" data-choice="<%=option.choice%>" data-count="<%=@data[option.choice]%>"></span>
+	<% end %>
+	<span class="response-data" data-choice="invalid" data-count="<%=@data[:invalid]%>"></span>
+<% end %>

@@ -1,0 +1,60 @@
+<%#common sidebar for all pages%>
+<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="test_sidebar" role="navigation">
+	<ul class="nav">
+		<%#top field of side-bar is your name%>
+		<li class="active">
+			<h4><%=@user.name%><br>(<%=@user.type%>)</h4>
+		</li>
+
+		<%#all courses%>
+		<li id="all_courses_link"><%=link_to "All Courses", user_path(@user), class:"nav_link"%>
+		</li>
+		<%#if is a page that belongs to a specific course, 
+		show course navigation links%>
+		<% if !@course.name.nil? && !@course.errors.any? %>
+			<li class="this_class">
+				<%= @course.name %>
+			</li>
+
+			<%#if user is an instructor, show new question button%>
+			<% if @user.instructor? %>
+				<li id="new_question_link"><%=link_to "New Question", new_question_path(course: @course.id), class:"nav_link"%>
+				</li>
+			<%end%>
+			<%#lectures link%>
+			<li id="lectures_link"><%=link_to ">> Lectures", course_path(@course), class:"nav_link" %>
+			</li>  
+
+			<%#only instructors can see all students%>
+			<% if @user.instructor? %>
+				<li id="students_link"><%=link_to ">> Students", course_path(@course) + "/students" ,class:"nav_link" %>
+				</li>  
+			<% end %>
+			<li id="questions_link"><%= link_to ">> Questions", questions_path(course: @course.id), class:"nav_link" %>
+			</li> 
+
+			<%#only instructors can delete a course%>
+			<%if @user.instructor?%>
+				<li class="delete_post"><%=link_to ">> Delete Course", @course, method: :delete, data: { confirm: 'Are you sure you want to delete this course?' }, class:"nav_link delete_post"%>
+				</li>  
+			<%#only students can unregister for a course%> 
+			<%else%>
+				<li><%= link_to '>> Unregister', unregister_users_path(:course => @course.id), method: :post, data: { confirm: 'Are you sure you want to unregister?'}, class:"nav_link delete_post" %>
+				</li>
+			<%end%>
+		<% end %> 
+
+		<%if @user.instructor? %>
+			<%#if is a page that belongs to a specific lecture, 
+			show lecture links%>
+			<% if !@lecture.nil?%>
+				<li class="this_class">
+						<%= @lecture.display_name %>
+				</li>
+				<li class="delete_post"><%=link_to ">> Delete Lecture", @lecture, method: :delete, data: { confirm: 'Are you sure you want to delete this lecture?' }, class:"nav_link delete_post" %>
+				</li> 
+			<%end%>
+		<%end%> 
+	</ul>
+</div>
+<%=render 'shared/sidebar_js'%>

@@ -1,0 +1,35 @@
+
+<ul class="list-group">
+<% l.questions.each do |q| %>
+	<li class="list-group-item">
+		<% if current_user.type == "Instructor" %>
+			<div class="question_actions btn-group btn-group-sm">
+				<%= link_to '<span class="glyphicon glyphicon-expand"></span>'.html_safe, question_path(q), type: "button", class: "btn btn-default", title: "Display question" %>
+				<%= link_to '<span class="glyphicon glyphicon-stats"></span>'.html_safe, analysis_question_path(q), type: "button", class: "btn btn-default", title: "Results" %>
+				<%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, question_path(q), method: :delete, data: { confirm: 'Are you sure you want to delete this question?' }, type: "button", class: "btn btn-default", title: "Delete" %>
+			</div>
+		<% end %>
+		<div class="question_block">
+			<div class="question_list_text"><%=q.question_text%></div>
+			<% if q.type == "MCQuestion" %>
+				<div class="question_list_options"><ul>
+				<% q.options.each do |option| %>
+					<li><%= option.choice %>. <%= option.option_text %></li>
+				<% end %>
+				</ul></div>
+			<% end %>
+			<div class="question_list_options"><ul>
+				<% if !q.answer.nil? %> 
+					<li>Answer: <%= q.answer %></li>
+				<% end %>
+				<% if !current_user.instructor? %>
+					</li>Your response: 
+					<% r = q.get_response(current_user) %>
+					<%= r.nil? ? "(None)" : r.value %>
+					</li>
+				<% end %>
+			</ul></div>
+		</div>
+	</li>
+<% end %>
+</ul>

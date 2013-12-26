@@ -1,0 +1,45 @@
+<div id = "calendar_list">
+	<table class = "courses">
+		<tr class = "table_title">
+			<td></td>
+			<td>Lecture Name</td>
+			<td>Date</td>
+			<td>Attendance</td>
+			<td>Question(s)</td>
+			<td></td>
+		</tr>
+	<% @course.lectures.order(:time).each do |lecture| %>
+		<% clickable = current_user.instructor? || lecture.time < Date.today %>
+		<% row_class = clickable ? "table_row clickable" : "table_row" %>
+		<tr class="<%=row_class%>">
+			<td class="color_block"> </td>
+			<td>
+				<% if clickable %>
+					<%= link_to lecture.display_name, lecture_path(lecture), class: "course_link" %>
+				<% else %>
+					<%= lecture.display_name %>
+				<% end %>
+			</td>
+			<td><%= lecture.time.strftime("%m-%d-%Y") %></td>
+			<%if @user.instructor?%>
+				<td><%= lecture.attendance%>/<%= lecture.course.students.count%></td>
+			<%else%>
+				<td><%= lecture.attended_by(@user)%>
+				</td>
+			<%end%>
+			<td><%=lecture.questions.count%></td>
+		</tr>
+	<%end %>
+	<% if !@course.lectures.any?%>
+	<tr>
+		<td></td>
+		<td>Oh no! You have no lectures yet!<br>
+			You can add lectures in the calendar view.</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<% end %>
+	</table>
+</div>

@@ -1,0 +1,34 @@
+// Place all the styles related to the Sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sign_in{
+	height: 50px !important;
+	font-size: 24px !important;
+}
+
+.log_in_box{
+	display: inline-block;
+	width: 280px;
+	vertical-align: top;
+}
+
+.sign_in_lable{
+	color: white;
+	font-size: 18px;
+	font-weight: 100;
+}
+.sign_in_form_left, .sign_in_form_right{
+	border: none;
+	height: 35px;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.sign_in_form_left{
+	width:95%;
+}
+
+.sign_in_form_right{
+	width:100%;
+}

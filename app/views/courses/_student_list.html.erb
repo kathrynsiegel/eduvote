@@ -1,0 +1,25 @@
+<table class = "courses">
+	<tr class= "table_title">
+		<td></td>
+		<td>Student Name</td>
+		<td>Attendance Record</td>
+		<td>Accuracy Score</td>
+	</tr>
+	<% @course.students.each do |student| %>
+	<tr class="table_row">
+		<td class="color_block"> </td>
+		<td><%= student.name %></td>
+		<td><%= student.attendance(@course) %>%</td>
+		<td><%= student.accuracy_score(@course) %>%</td>
+	</tr>
+	<% end %>
+	<% if !@course.students.any?%>
+	<tr>
+		<td></td>
+		<td>Oh no! You have no students yet!</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<% end %>
+</table>
+

@@ -1,0 +1,87 @@
+<%= provide(:title, "Welcome") %>
+
+<div id = "container">
+	<div id = "welcome_bg_stretch"></div>
+	<div id = "welcome_container">
+
+		<div id = "welcome_title">
+			<h1>
+				classroom participation <br>
+				made easy.
+			</h1>
+			<br>
+			<h2>
+				EDUvote allows students to submit answers to short questions asked in class via texting and enables instructors to easily track and analyze responses. 
+				<button onclick="parent.location='about'">learn more &rarr;</button>
+			</h2>
+		</div>
+		<div id = "signin_form">
+			<p id="error"><%= flash[:error] %></p>
+			<p id="notice"><%= notice %></p>
+			<%= render 'sessions/form' %>
+		</div>
+	</div><!--welcome_bg_stretch-->
+</div><!--container-->
+
+<!--phone image-->
+<div id="feature_img_container">
+	<div class="features_container center">
+		<div id="feature_img">
+			<h1>make texting in class part of the learning experience.<br><br><br></h1>
+			<img src="/assets/Mobile_transparant.png" width="900px"/>
+		</div>
+	</div>
+</div>
+
+<!--features container-->
+<div class = "features_container center">
+	<h2>Features</h2>
+
+	<!--create courses-->
+	<div class="screenshot right-margin">
+		<img class="rounded border" src="/assets/new_course.png" width="348px"/>
+		<p><br>
+			Create courses with other instructors
+		</p>
+	</div>
+
+	<!--show lectures-->
+	<div class="screenshot">
+		<img class="rounded border" src="/assets/edit_lectures.png" width="348px"/>
+		<p><br>
+			Lectures calendar is fully customizeable
+		</p>
+	</div>
+
+	<!--edit lectures-->
+	<div class="screenshot left-margin">
+		<img class="rounded border" src="/assets/all_students.png" width="348px"/>
+		<p><br>
+			Easily keep track of attendance and accuracy
+		</p>
+	</div>
+
+	<!--question responses-->
+	<div class="screenshot right-margin">
+		<img class="rounded border" src="/assets/question_responses.png" width="348px"/>
+		<p><br>
+			Responses are recorded and counted live
+		</p>
+	</div>
+
+	<!--show question-->
+	<div class="screenshot">
+		<img class="rounded border" src="/assets/show_question.png" width="348px"/>
+		<p><br>
+			Graph displays show distribution of answers
+		</p>
+	</div>
+
+	<!--all questions-->
+	<div class="screenshot left-margin">
+		<img class="rounded border" src="/assets/all_questions.png" width="348px"/>
+		<p><br>
+			All questions are stored and easily accessible
+		</p>
+	</div>
+</div>

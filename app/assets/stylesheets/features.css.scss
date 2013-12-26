@@ -1,0 +1,45 @@
+.features_container{
+	margin: 0 auto;
+	width: 1280px;
+	height: auto;
+	min-height: 400px;
+	padding: 100px 40px;
+}
+
+#feature_img{
+	width: 900px;
+	margin: 0 auto;
+	h1{
+		color: white;
+	}
+}
+
+#feature_img_container{
+	background-color: #4A4A7C;
+}
+.class{
+	margin: 0 auto;
+}
+.center{
+	text-align: center;
+}
+
+.screenshot{
+	width:350px;
+	display:inline-block;
+	margin-top: 60px;
+}
+.rounded{
+	border-radius: 8px;
+}
+
+.border{
+	border: 1px solid #ccc;
+}
+
+.left-margin{
+	margin-left:55px;
+}
+.right-margin{
+	margin-right:55px;
+}
